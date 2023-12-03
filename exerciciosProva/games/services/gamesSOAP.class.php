@@ -4,10 +4,12 @@ require_once "../models/consoleDAO.class.php";
 
 $server = new soapServer("games.wsdl");
 
-class GamesSOAP {
+class GamesSOAP
+{
 	private $autenticado = false;
 
-	public function security($header) {
+	public function security($header)
+	{
 		if (isset($header->username) && isset($header->password)) {
 			if ($header->username == "adm" && ($header->password == "123")) {
 				$this->autenticado = true;
@@ -15,7 +17,8 @@ class GamesSOAP {
 		}
 	}
 
-	public function buscar_consoles() {
+	public function buscar_consoles()
+	{
 		if ($this->autenticado) {
 			$consoleDAO = new ConsoleDAO();
 			$retorno = $consoleDAO->buscar_todos_consoles();
@@ -28,4 +31,3 @@ class GamesSOAP {
 
 $server->setObject(new GamesSOAP());
 $server->handle();
-

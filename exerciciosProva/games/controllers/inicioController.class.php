@@ -7,4 +7,3 @@ class inicioController
         require_once "views/menu.html";
     }
 }
-

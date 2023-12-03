@@ -1,7 +1,26 @@
 <?php
 
-class GameController {
-    public function listar_games_por_console() {
+class GameController
+{
+    private function setupSOAP()
+    {
+        $client = new soapClient("http://localhost/exerciciosprova/games/services/gamesSOAP.class.php?wsdl");
+
+        $aut_parm = new stdClass();
+        $aut_parm->username = "adm";
+        $aut_parm->password = "123";
+
+        $header_parm = new soapVar($aut_parm, SOAP_ENC_OBJECT);
+
+        $header = new soapHeader("games", "security", $header_parm, false);
+
+        $client->__setSoapHeaders(array($header));
+
+        return $client;
+    }
+
+    public function listar_games_por_console()
+    {
         if ($_POST) {
             $dados = array(
                 "oper" => "buscar_games",
@@ -22,17 +41,7 @@ class GameController {
             require_once "views/listar_games_console.php";
         }
 
-        $client = new soapClient("http://localhost/exerciciosprova/games/services/gamesSOAP.class.php?wsdl");
-
-        $aut_parm = new stdClass();
-        $aut_parm->username = "adm";
-        $aut_parm->password = "123";
-
-        $header_parm = new soapVar($aut_parm, SOAP_ENC_OBJECT);
-
-        $header = new soapHeader("games", "security", $header_parm, false);
-
-        $client->__setSoapHeaders(array($header));
+        $client = $this->setupSOAP();
 
         $retorno = $client->buscar_consoles();
 
@@ -40,8 +49,9 @@ class GameController {
 
         require "views/listar_consoles.php";
     }
-    
-    public function novo_game() {
+
+    public function novo_game()
+    {
         if ($_POST) {
             $gameNome = urlencode($_POST["nome"]);
             $gameConsole = urlencode($_POST["console"]);
@@ -51,17 +61,7 @@ class GameController {
             echo $retorno;
         }
 
-        $client = new soapClient("http://localhost/exerciciosprova/games/services/gamesSOAP.class.php?wsdl");
-
-        $aut_parm = new stdClass();
-        $aut_parm->username = "adm";
-        $aut_parm->password = "123";
-
-        $header_parm = new soapVar($aut_parm, SOAP_ENC_OBJECT);
-
-        $header = new soapHeader("games", "security", $header_parm, false);
-
-        $client->__setSoapHeaders(array($header));
+        $client = $this->setupSOAP();
 
         $retorno = $client->buscar_consoles();
 

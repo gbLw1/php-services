@@ -11,4 +11,3 @@ if ($_GET) {
     $obj = new inicioController();
     $obj->inicio();
 }
-

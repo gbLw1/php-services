@@ -1,10 +1,12 @@
 <?php
 
-class Console {
+class Console
+{
     public function __construct(
         private int $idconsole = 0,
-        private string $descricao = "")
-    { }
+        private string $descricao = ""
+    ) {
+    }
 
     public function getId(): int
     {
@@ -16,4 +18,3 @@ class Console {
         return $this->descricao;
     }
 }
-

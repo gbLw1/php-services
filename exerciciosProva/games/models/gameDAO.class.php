@@ -1,6 +1,7 @@
 <?php
 
-class GameDAO extends conexao {
+class GameDAO extends conexao
+{
 	public function __construct()
 	{
 		parent::__construct();
@@ -38,4 +39,3 @@ class GameDAO extends conexao {
 		}
 	}
 }
-

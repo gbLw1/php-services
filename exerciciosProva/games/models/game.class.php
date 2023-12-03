@@ -1,11 +1,13 @@
 <?php
 
-class Game {
+class Game
+{
     public function __construct(
         private int $idgame = 0,
         private int $console_idconsole = 0,
-        private string $nome = "")
-    { }
+        private string $nome = ""
+    ) {
+    }
 
     public function getId(): int
     {
@@ -22,4 +24,3 @@ class Game {
         return $this->nome;
     }
 }
-
